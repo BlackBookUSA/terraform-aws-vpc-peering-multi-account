@@ -1,8 +1,3 @@
-variable "requester_aws_assume_role_arn" {
-  description = "Requester AWS Assume Role ARN"
-  type        = string
-}
-
 variable "requester_region" {
   type        = string
   description = "Requester AWS region"
@@ -29,10 +24,6 @@ variable "requester_allow_remote_vpc_dns_resolution" {
 provider "aws" {
   alias  = "requester"
   region = var.requester_region
-
-  assume_role {
-    role_arn = var.requester_aws_assume_role_arn
-  }
 }
 
 locals {
@@ -46,7 +37,7 @@ locals {
 }
 
 module "requester" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  source     = "git::https://github.com/blackbookusa/terraform-null-label.git?ref=tags/0.3.3"
   enabled    = var.enabled
   namespace  = var.namespace
   name       = var.name
