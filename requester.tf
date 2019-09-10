@@ -97,19 +97,19 @@ resource "aws_vpc_peering_connection" "requester" {
   tags = module.requester.tags
 }
 
-resource "aws_vpc_peering_connection_options" "requester" {
-  provider = aws.requester
-
-  # As options can't be set until the connection has been accepted
-  # create an explicit dependency on the accepter.
-  vpc_peering_connection_id = join("", aws_vpc_peering_connection.requester.*.id)
-
-  requester {
-    allow_remote_vpc_dns_resolution = var.requester_allow_remote_vpc_dns_resolution
-    allow_classic_link_to_remote_vpc = false
-    allow_vpc_to_remote_classic_link = false
-  }
-}
+//resource "aws_vpc_peering_connection_options" "requester" {
+//  provider = aws.requester
+//
+//  # As options can't be set until the connection has been accepted
+//  # create an explicit dependency on the accepter.
+//  vpc_peering_connection_id = join("", aws_vpc_peering_connection.requester.*.id)
+//
+//  requester {
+//    allow_remote_vpc_dns_resolution = var.requester_allow_remote_vpc_dns_resolution
+//    allow_classic_link_to_remote_vpc = false
+//    allow_vpc_to_remote_classic_link = false
+//  }
+//}
 
 locals {
   requester_aws_route_table_ids           = distinct(sort(data.aws_route_table.requester.*.route_table_id))

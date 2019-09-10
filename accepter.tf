@@ -118,16 +118,16 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
   tags                      = module.accepter.tags
 }
 
-resource "aws_vpc_peering_connection_options" "accepter" {
-  provider                  = aws.accepter
-  vpc_peering_connection_id = join("", aws_vpc_peering_connection.requester.*.id)
-
-  accepter {
-    allow_remote_vpc_dns_resolution = var.accepter_allow_remote_vpc_dns_resolution
-    allow_classic_link_to_remote_vpc = false
-    allow_vpc_to_remote_classic_link = false
-  }
-}
+//resource "aws_vpc_peering_connection_options" "accepter" {
+//  provider                  = aws.accepter
+//  vpc_peering_connection_id = join("", aws_vpc_peering_connection.requester.*.id)
+//
+//  accepter {
+//    allow_remote_vpc_dns_resolution = var.accepter_allow_remote_vpc_dns_resolution
+//    allow_classic_link_to_remote_vpc = false
+//    allow_vpc_to_remote_classic_link = false
+//  }
+//}
 
 output "accepter_connection_id" {
   value       = join("", aws_vpc_peering_connection_accepter.accepter.*.id)
